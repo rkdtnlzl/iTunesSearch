@@ -11,7 +11,6 @@ import SnapKit
 import RxSwift
 import RxCocoa
 
-
 class SearchViewController: UIViewController {
     
     // MARK: Property
@@ -29,7 +28,11 @@ class SearchViewController: UIViewController {
     
     // MARK: Rx Binding
     func bind() {
-        let input = SearchViewModel.Input(searchButtonTap: searchBar.rx.searchButtonClicked, searchText: searchBar.rx.text.orEmpty)
+        let input = SearchViewModel.Input(
+            searchButtonTap: searchBar.rx.searchButtonClicked,
+            searchText: searchBar.rx.text.orEmpty,
+            itemSelected: tableView.rx.itemSelected
+        )
         let output = viewModel.transform(input: input)
         
         output.searchList
@@ -41,6 +44,25 @@ class SearchViewController: UIViewController {
                     cell.appIconImageView.kf.setImage(with: imageURL)
                 }
             }
+            .disposed(by: disposeBag)
+        
+        output.selectedItem
+            .bind(with: self, onNext: { owner, result in
+                // MARK: 해상도 높이기
+                var artistImageURL = result.artworkUrl100 ?? ""
+                let index1 = artistImageURL.index(artistImageURL.endIndex, offsetBy: -11)
+                let index2 = artistImageURL.index(artistImageURL.endIndex, offsetBy: -7)
+                artistImageURL.insert(contentsOf: "00", at: index2)
+                artistImageURL.insert(contentsOf: "00", at: index1)
+                let detailVC = DetailViewController()
+                let detailVM = DetailViewModel(
+                    trackName: result.trackName ?? "",
+                    artistName: result.artistName ?? "",
+                    artworkUrl100: artistImageURL
+                )
+                detailVC.viewModel = detailVM
+                owner.navigationController?.pushViewController(detailVC, animated: true)
+            })
             .disposed(by: disposeBag)
     }
     

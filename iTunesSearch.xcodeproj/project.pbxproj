@@ -20,6 +20,8 @@
 		01E408D22C65044F0006B86F /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E408D12C65044F0006B86F /* Search.swift */; };
 		01E408D42C6507460006B86F /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E408D32C6507460006B86F /* SearchViewModel.swift */; };
 		01E408D72C65DF280006B86F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 01E408D62C65DF280006B86F /* Kingfisher */; };
+		01E408D92C65EEF00006B86F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E408D82C65EEF00006B86F /* DetailViewController.swift */; };
+		01E408DF2C65F3370006B86F /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E408DE2C65F3370006B86F /* DetailViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		01E408CF2C65034D0006B86F /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		01E408D12C65044F0006B86F /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		01E408D32C6507460006B86F /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		01E408D82C65EEF00006B86F /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		01E408DE2C65F3370006B86F /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,16 +76,50 @@
 			children = (
 				01E408B12C64E0280006B86F /* AppDelegate.swift */,
 				01E408B32C64E0280006B86F /* SceneDelegate.swift */,
-				01E408B52C64E0280006B86F /* SearchViewController.swift */,
-				01E408D32C6507460006B86F /* SearchViewModel.swift */,
-				01E408C52C64E71B0006B86F /* SearchTableViewCell.swift */,
-				01E408CF2C65034D0006B86F /* NetworkManager.swift */,
-				01E408D12C65044F0006B86F /* Search.swift */,
+				01E408DD2C65F30D0006B86F /* SearchDetail */,
+				01E408DC2C65F3020006B86F /* Model */,
+				01E408DB2C65F2F70006B86F /* Network */,
+				01E408DA2C65F0AE0006B86F /* Search */,
 				01E408BA2C64E02A0006B86F /* Assets.xcassets */,
 				01E408BC2C64E02A0006B86F /* LaunchScreen.storyboard */,
 				01E408BF2C64E02A0006B86F /* Info.plist */,
 			);
 			path = iTunesSearch;
+			sourceTree = "<group>";
+		};
+		01E408DA2C65F0AE0006B86F /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				01E408B52C64E0280006B86F /* SearchViewController.swift */,
+				01E408D32C6507460006B86F /* SearchViewModel.swift */,
+				01E408C52C64E71B0006B86F /* SearchTableViewCell.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		01E408DB2C65F2F70006B86F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				01E408CF2C65034D0006B86F /* NetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		01E408DC2C65F3020006B86F /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				01E408D12C65044F0006B86F /* Search.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		01E408DD2C65F30D0006B86F /* SearchDetail */ = {
+			isa = PBXGroup;
+			children = (
+				01E408D82C65EEF00006B86F /* DetailViewController.swift */,
+				01E408DE2C65F3370006B86F /* DetailViewModel.swift */,
+			);
+			path = SearchDetail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -169,9 +207,11 @@
 				01E408D42C6507460006B86F /* SearchViewModel.swift in Sources */,
 				01E408C62C64E71B0006B86F /* SearchTableViewCell.swift in Sources */,
 				01E408D02C65034D0006B86F /* NetworkManager.swift in Sources */,
+				01E408DF2C65F3370006B86F /* DetailViewModel.swift in Sources */,
 				01E408D22C65044F0006B86F /* Search.swift in Sources */,
 				01E408B22C64E0280006B86F /* AppDelegate.swift in Sources */,
 				01E408B42C64E0280006B86F /* SceneDelegate.swift in Sources */,
+				01E408D92C65EEF00006B86F /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

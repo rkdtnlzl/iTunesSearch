@@ -16,10 +16,12 @@ class SearchViewModel {
     struct Input {
         let searchButtonTap: ControlEvent<Void>
         let searchText: ControlProperty<String>
+        let itemSelected: ControlEvent<IndexPath>
     }
     
     struct Output {
         let searchList: Observable<[SearchResult]>
+        let selectedItem: Observable<SearchResult>
     }
     
     func transform(input: Input) -> Output {
@@ -51,6 +53,11 @@ class SearchViewModel {
             }
             .disposed(by: disposeBag)
         
-        return Output(searchList: searchList)
+        let selectedItem = input.itemSelected
+            .withLatestFrom(searchList) { indexPath, items in
+                return items[indexPath.row]
+            }
+        
+        return Output(searchList: searchList, selectedItem: selectedItem)
     }
 }
