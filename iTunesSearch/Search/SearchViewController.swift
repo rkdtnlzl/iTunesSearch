@@ -58,7 +58,8 @@ class SearchViewController: UIViewController {
                 let detailVM = DetailViewModel(
                     trackName: result.trackName ?? "",
                     artistName: result.artistName ?? "",
-                    artworkUrl100: artistImageURL
+                    artworkUrl100: artistImageURL,
+                    previewUrl: result.previewUrl
                 )
                 detailVC.viewModel = detailVM
                 owner.navigationController?.pushViewController(detailVC, animated: true)
