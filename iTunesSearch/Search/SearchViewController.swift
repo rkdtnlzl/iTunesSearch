@@ -39,32 +39,39 @@ class SearchViewController: UIViewController {
             .bind(to: tableView.rx.items(cellIdentifier: SearchTableViewCell.identifier, cellType: SearchTableViewCell.self)) { (row, element, cell) in
                 cell.titleLabel.text = element.trackName
                 cell.artistLabel.text = element.artistName
-                if let url = element.artworkUrl100 {
-                    let imageURL = URL(string: url)
-                    cell.appIconImageView.kf.setImage(with: imageURL)
-                }
+                let imageURL = URL(string: element.artworkUrl100)
+                cell.appIconImageView.kf.setImage(with: imageURL)
             }
             .disposed(by: disposeBag)
         
         output.selectedItem
             .bind(with: self, onNext: { owner, result in
-                // MARK: 해상도 높이기
-                var artistImageURL = result.artworkUrl100 ?? ""
-                let index1 = artistImageURL.index(artistImageURL.endIndex, offsetBy: -11)
-                let index2 = artistImageURL.index(artistImageURL.endIndex, offsetBy: -7)
-                artistImageURL.insert(contentsOf: "00", at: index2)
-                artistImageURL.insert(contentsOf: "00", at: index1)
+                let artistImageURL = owner.imageSizeUp(urlString: result.artworkUrl100)
                 let detailVC = DetailViewController()
-                let detailVM = DetailViewModel(
-                    trackName: result.trackName ?? "",
-                    artistName: result.artistName ?? "",
+                let detailInput = DetailViewModel.Input(
+                    playButtonTap: detailVC.playButton.rx.tap,
+                    trackName: result.trackName,
+                    artistName: result.artistName,
                     artworkUrl100: artistImageURL,
                     previewUrl: result.previewUrl
                 )
+                let detailVM = DetailViewModel()
+                let detailOutput = detailVM.transform(input: detailInput)
                 detailVC.viewModel = detailVM
+                detailVC.bind(output: detailOutput)
                 owner.navigationController?.pushViewController(detailVC, animated: true)
             })
             .disposed(by: disposeBag)
+    }
+    
+    // MARK: 이미지 해상도 높이기
+    func imageSizeUp(urlString: String) -> String {
+        var url = urlString
+        let index1 = url.index(url.endIndex, offsetBy: -11)
+        let index2 = url.index(url.endIndex, offsetBy: -7)
+        url.insert(contentsOf: "00", at: index2)
+        url.insert(contentsOf: "00", at: index1)
+        return url
     }
     
     // MARK: Configure UI
