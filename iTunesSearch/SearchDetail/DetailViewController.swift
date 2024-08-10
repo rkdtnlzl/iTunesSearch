@@ -8,12 +8,13 @@
 import UIKit
 import SnapKit
 import RxSwift
-import WebKit
+import RxCocoa
 import AVFoundation
 import AVKit
 
 class DetailViewController: UIViewController {
     
+    // MARK: Property
     let titleImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
@@ -58,37 +59,42 @@ class DetailViewController: UIViewController {
     }()
     
     var viewModel: DetailViewModel?
+    let disposeBag = DisposeBag()
     
+    // MARK: LifeCycle
     override func viewDidLoad() {
+        super.viewDidLoad()
         view.backgroundColor = .white
         configure()
-        bind()
-        playButton.addTarget(self, action: #selector(playButtonTapped), for: .touchUpInside)
     }
     
-    @objc func playButtonTapped() {
-        print(#function)
-        guard let viewModel = viewModel, let urlString = viewModel.previewUrl, let previewURL = URL(string: urlString) else {
-            return
-        }
-        let player = AVPlayer(url: previewURL)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = player
-        present(playerViewController, animated: true) {
-            player.play()
-        }
-    }
-    
-    func bind() {
-        guard let viewModel = viewModel else { return }
-        titleLabel.text = viewModel.trackName
-        artistLabel.text = viewModel.artistName
+    // MARK: Rx Binding
+    func bind(output: DetailViewModel.Output) {
+        output.trackName
+            .bind(to: titleLabel.rx.text)
+            .disposed(by: disposeBag)
         
-        if let url = viewModel.artworkUrl100, let imageURL = URL(string: url) {
-            titleImageView.kf.setImage(with: imageURL)
-            preview.kf.setImage(with: imageURL)
-            
-        }
+        output.artistName
+            .bind(to: artistLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        output.artworkUrl100
+            .bind(with: self, onNext: { owner, url in
+                owner.titleImageView.kf.setImage(with: url)
+                owner.preview.kf.setImage(with: url)
+            })
+            .disposed(by: disposeBag)
+        
+        output.playVideo
+            .bind(with: self, onNext: { owner, url in
+                let player = AVPlayer(url: url)
+                let playerViewController = AVPlayerViewController()
+                playerViewController.player = player
+                owner.present(playerViewController, animated: true) {
+                    player.play()
+                }
+            })
+            .disposed(by: disposeBag)
     }
     
     private func configure() {
@@ -112,12 +118,14 @@ class DetailViewController: UIViewController {
             make.top.equalTo(titleLabel.snp.bottom).offset(20)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
         }
+        
         preview.snp.makeConstraints { make in
             make.top.equalTo(artistLabel.snp.bottom).offset(60)
             make.centerX.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(200)
             make.width.equalTo(300)
         }
+        
         playButton.snp.makeConstraints { make in
             make.center.equalTo(preview)
             make.size.equalTo(70)
