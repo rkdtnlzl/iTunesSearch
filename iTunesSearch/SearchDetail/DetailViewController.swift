@@ -80,7 +80,9 @@ class DetailViewController: UIViewController {
         
         output.artworkUrl100
             .bind(with: self, onNext: { owner, url in
+                owner.titleImageView.kf.indicatorType = .activity
                 owner.titleImageView.kf.setImage(with: url)
+                owner.preview.kf.indicatorType = .activity
                 owner.preview.kf.setImage(with: url)
             })
             .disposed(by: disposeBag)
@@ -106,7 +108,7 @@ class DetailViewController: UIViewController {
         
         titleImageView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
-            make.height.equalTo(200)
+            make.height.equalTo(300)
         }
         
         titleLabel.snp.makeConstraints { make in

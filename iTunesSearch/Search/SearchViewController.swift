@@ -40,6 +40,7 @@ class SearchViewController: UIViewController {
                 cell.titleLabel.text = element.trackName
                 cell.artistLabel.text = element.artistName
                 let imageURL = URL(string: element.artworkUrl100)
+                cell.appIconImageView.kf.indicatorType = .activity
                 cell.appIconImageView.kf.setImage(with: imageURL)
             }
             .disposed(by: disposeBag)

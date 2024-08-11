@@ -30,7 +30,7 @@ final class SearchTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
-        imageView.backgroundColor = .gray
+        imageView.backgroundColor = .white
         imageView.layer.cornerRadius = 8
         return imageView
     }()
