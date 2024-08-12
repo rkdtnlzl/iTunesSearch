@@ -22,6 +22,7 @@
 		01E408D72C65DF280006B86F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 01E408D62C65DF280006B86F /* Kingfisher */; };
 		01E408D92C65EEF00006B86F /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E408D82C65EEF00006B86F /* DetailViewController.swift */; };
 		01E408DF2C65F3370006B86F /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01E408DE2C65F3370006B86F /* DetailViewModel.swift */; };
+		01E409152C6A4A840006B86F /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 01E409142C6A4A840006B86F /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01E409152C6A4A840006B86F /* Alamofire in Frameworks */,
 				01E408D72C65DF280006B86F /* Kingfisher in Frameworks */,
 				01E408CE2C64E7430006B86F /* RxSwift in Frameworks */,
 				01E408CC2C64E7430006B86F /* RxCocoa in Frameworks */,
@@ -143,6 +145,7 @@
 				01E408CB2C64E7430006B86F /* RxCocoa */,
 				01E408CD2C64E7430006B86F /* RxSwift */,
 				01E408D62C65DF280006B86F /* Kingfisher */,
+				01E409142C6A4A840006B86F /* Alamofire */,
 			);
 			productName = iTunesSearch;
 			productReference = 01E408AE2C64E0280006B86F /* iTunesSearch.app */;
@@ -176,6 +179,7 @@
 				01E408C72C64E72E0006B86F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				01E408CA2C64E7430006B86F /* XCRemoteSwiftPackageReference "RxSwift" */,
 				01E408D52C65DF280006B86F /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				01E409132C6A4A840006B86F /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 01E408AF2C64E0280006B86F /* Products */;
 			projectDirPath = "";
@@ -460,6 +464,14 @@
 				minimumVersion = 7.12.0;
 			};
 		};
+		01E409132C6A4A840006B86F /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.9.1;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -482,6 +494,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 01E408D52C65DF280006B86F /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
+		};
+		01E409142C6A4A840006B86F /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 01E409132C6A4A840006B86F /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
